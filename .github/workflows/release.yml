@@ -1,0 +1,21 @@
+name: Release
+
+# Push a semantic version tag to publish a release:
+#   git tag -a v1.1.0 -m "v1.1.0" && git push origin v1.1.0
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write # create the GitHub release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Create release with generated notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: gh release create "${TAG}" --verify-tag --generate-notes --title "${TAG}"

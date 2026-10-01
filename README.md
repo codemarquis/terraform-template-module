@@ -18,7 +18,7 @@ Use it two ways:
 
 ```mermaid
 flowchart LR
-    caller(["module &quot;bucket&quot;<br/>bucket_name = …"])
+    caller(["module bucket<br/>bucket_name = …"])
 
     subgraph module["terraform-template-module"]
         direction TB
@@ -28,7 +28,7 @@ flowchart LR
         pab["Public access block<br/>all four settings on"]
         sse["Default encryption<br/>SSE-KMS + S3 Bucket Keys"]
         ver["Versioning"]
-        pol["Bucket policy<br/>deny HTTP · deny TLS &lt; 1.2<br/>+ your statements"]
+        pol["Bucket policy<br/>deny HTTP · deny TLS below 1.2<br/>+ your statements"]
         lc["Lifecycle<br/>abort stale uploads + your rules"]
         log["Access logging<br/>(optional)"]
     end

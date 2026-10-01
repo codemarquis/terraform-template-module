@@ -18,4 +18,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
-        run: gh release create "${TAG}" --verify-tag --generate-notes --title "${TAG}"
+        run: |
+          # Re-pushing an existing tag (e.g. after a history rewrite) keeps the existing release.
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            echo "Release ${TAG} already exists; nothing to do."
+            exit 0
+          fi
+          gh release create "${TAG}" --verify-tag --generate-notes --title "${TAG}"

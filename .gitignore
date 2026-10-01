@@ -35,3 +35,6 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Modules don't pin providers for their callers
+.terraform.lock.hcl
